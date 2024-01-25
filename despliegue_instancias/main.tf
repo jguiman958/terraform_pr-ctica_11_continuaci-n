@@ -1,9 +1,9 @@
 # Configuramos el proveedor de AWS
 provider "aws" {
   region     = "us-east-1"
-  access_key = "ASIAWKPXDFVALDUEP5FJ"
-  secret_key = "y6TOt3eYXNxB1RUkZ9VXutg12mZL54hM3yIJZPVg"
-  token      = "FwoGZXIvYXdzEIv//////////wEaDE52sAQrEdlGOYNMxCLJAR9eCcLGM8N5QXCT/oaipAcMLq+ezyGbjQBver7fqdo2mDRHt/lYPGfWdjE3lpMYqwVg22Sof+Ae2eF7uQI+z32CumAirsRmi8oyKCFVHh9G+pwQxj1hzujFy2S/Cn1Zr2p1wcxIK+WLM1/JwOPG1S468g/GksuqYfZKBpsnJnCJp/gtID4yFO1qV0O7a2/YBEhtl/MdAt/LN62r9FlzL4qw+jkGGI1Za0FG3AR3WHbUJXNjT65u2RiD1v/hjtuRm+weUIDikOdsJyj1nLWtBjItPSV3UYYDaMnhObYhVzQa1kouHFPHTRpVv9/5GX2QgUM8L7oNrbBUfkFqa6xz"
+  access_key = "ASIAWKPXDFVAC2KGKBV3"
+  secret_key = "xsuwPLi9DEuSPOBjPAkYQsmT8nudHyrYzgNhde0l"
+  token      = "FwoGZXIvYXdzEOX//////////wEaDNjztRcTx8YFbkjA4yLJAUqxmYNW10MOgIDEbW7KuTcrrxLBaB/Z6wRqt75TachEJrITVs8QGvFTiUvXHAK1mIIolLWqUbBOj50PSh1+H6K7bzV5Nb7/ZYORFMOXRLbPpqeT0TWRTPBGuWtRH5ptHDkq6i8jhvFJgURr6rrmatg7sVKsTQuVC/6przZU0CXOU4YaiM0qPwiRDXeZyTlORkW/ShENxV4IAXHphDWdL57HYdvObAx22z+vgd/VvhqLWPhtkJ/BMN0DMCFW/Yoo7qOFfE1tKZMJMCjnj8mtBjItNBMHiicnrINysycpH+xGlW7SgeMlWgFFyoKdGrtNclFPMobas4RHnrACpW9b"
 }
 
 # CREACIÓN DE LOS GRUPOS DE SEGURIDAD.
@@ -218,4 +218,56 @@ resource "aws_instance" "backend" {
   tags = {
     Name = "backend"
   }
+}
+
+# Creación de ips flotantes
+# Creamos una IP elástica y la asociamos a la instancia
+
+# Balanceador de carga.
+resource "aws_eip" "load_balancer" {
+  instance = aws_instance.load_balancer.id
+}
+
+# Frontend 1 y 2
+resource "aws_eip" "ip_elastica_frontend_1" {
+  instance = aws_instance.frontend_1_terraform.id
+}
+
+resource "aws_eip" "ip_elastica_frontend_2" {
+  instance = aws_instance.frontend_2_terraform.id
+}
+
+# Backend
+#resource "aws_eip" "ip_elastica_backend" {
+#  instance = aws_instance.backend.id
+#}
+
+# NFS
+resource "aws_eip" "ip_elastica_nfs" {
+  instance = aws_instance.nfs_server.id
+}
+
+# Mostrar contenido ip elasticas 
+output "load_balancer" {
+  value = aws_eip.load_balancer.public_ip
+}
+
+# Mostrar contenido ip elasticas 
+output "ip_elastica_frontend_1" {
+  value = aws_eip.ip_elastica_frontend_1.public_ip
+}
+
+# Mostrar contenido ip elasticas 
+output "ip_elastica_frontend_2" {
+  value = aws_eip.ip_elastica_frontend_2.public_ip
+}
+
+# Mostrar contenido ip elasticas 
+#output "ip_elastica_backend" {
+#  value = aws_eip.ip_elastica_backend.public_ip
+#}
+
+# Mostrar contenido ip elasticas 
+output "ip_elastica_nfs" {
+  value = aws_eip.ip_elastica_nfs.public_ip
 }

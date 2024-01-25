@@ -22,6 +22,19 @@ Terraform apply --> Y aplicamos los cambios.
 
 Debe realizarse según el orden que has ido leyéndolo, de arriba para abajo puedes saltarte el validate... no te lo recomiendo.
 
+### Recomiendo instalar terraform desde snap.
+Estableciendo lo siguiente:
+
+```
+sudo apt update && sudo apt install snapd
+```
+
+Y luego esta sentencia para terraform...
+
+```
+sudo snap terraform --classic
+```
+
 ## Fichero main.tf
 
 ### En este apartado tenemos que crear al proveedor en este caso es aws, donde queremos crear las instancias...
@@ -284,61 +297,91 @@ resource "aws_instance" "backend" {
 }
 ```
 
-# Creación de ips elásticas para las máquinas.
-# Creamos una IP elástica y la asociamos a la instancia
+Con esto asignamos directamente el grupo a la instancia mientras se va creando, por eso tenemos que crear los grupos antes, ya que sin grupos, la instancia no se crea.
 
-# Balanceador de carga.
+# Creación de ips elásticas para las máquinas.
+
+También, vamos a automatizar el proceso de automatización de ips elásticas, para que no lo tengamos que hacer a mano.
+
+## Balanceador de carga.
+```
 resource "aws_eip" "load_balancer" {
   instance = aws_instance.load_balancer.id
 }
+```
 
-# Frontend 1 y 2
+En este caso, estamos asignando el id de la maquina a la ip elástica, con ese sencillo paso.
+
+## Frontend 1 y 2
+
+```
 resource "aws_eip" "ip_elastica_frontend_1" {
   instance = aws_instance.frontend_1_terraform.id
 }
+```
 
+```
 resource "aws_eip" "ip_elastica_frontend_2" {
   instance = aws_instance.frontend_2_terraform.id
 }
+```
 
-# Backend
+Hacemos exactamente lo mismo aquí con frontend 1 y 2 almacenando en ``instance`` el id de la instancia y otorgandole el recurso de ip flotante. 
+
+## Backend
+
+```
 #resource "aws_eip" "ip_elastica_backend" {
-#  instance = aws_instance.backend.id
+#instance = aws_instance.backend.id
 #}
+```
 
-# NFS
+Mas de lo mismo con el backend y la siguientes máquinas, esta comentado porque no puedo crear mas de 5 ips elásticas, y teniendo encuenta que trabajo con el nodo central, puedo crear el backend, sin embargo no puedo asignarle una ip flotante.
+
+# NFS.
+
+Como podemos comprobar cada uno tiene un nombre propio, para la variable del recurso.
+
+```
 resource "aws_eip" "ip_elastica_nfs" {
   instance = aws_instance.nfs_server.id
 }
+```
 
 # Mostrar contenido ip elasticas 
+
+Con esto podemos mostrar que ips flotantes se asignan a la instancia al final de la ejecución del fichero ``main.tf``
+
+```
 output "load_balancer" {
   value = aws_eip.load_balancer.public_ip
 }
 
-# Mostrar contenido ip elasticas 
 output "ip_elastica_frontend_1" {
   value = aws_eip.ip_elastica_frontend_1.public_ip
 }
 
-# Mostrar contenido ip elasticas 
 output "ip_elastica_frontend_2" {
   value = aws_eip.ip_elastica_frontend_2.public_ip
 }
 
-# Mostrar contenido ip elasticas 
 #output "ip_elastica_backend" {
 #  value = aws_eip.ip_elastica_backend.public_ip
 #}
 
-# Mostrar contenido ip elasticas 
 output "ip_elastica_nfs" {
   value = aws_eip.ip_elastica_nfs.public_ip
 }
+```
 
 Si queremos comprobar que funciona, solo tenemos que irnos al panel de las instancias creadas de aws y comprobar que se ha iniciado.
 
 ## Comprobaciones.
+### Creación de los grupos de seguridad:
+En la siguiente imagen se ven los grupos de seguridad creados.
+
+
+### Creación de las instancias:
 En esta imagen vemos que me ha creado todas esas instancias a la vez, exluyendo la del nodo principal e instancia1 y instancia2.
 
 ![instancias_terraform](https://github.com/jguiman958/practica_11_terraform/assets/145347496/fe019bd3-81e2-4f2c-97c6-b9e049117385)

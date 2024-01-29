@@ -1,9 +1,9 @@
 # Configuramos el proveedor de AWS
 provider "aws" {
   region     = "us-east-1"
-  access_key = "ASIAWKPXDFVAC2KGKBV3"
-  secret_key = "xsuwPLi9DEuSPOBjPAkYQsmT8nudHyrYzgNhde0l"
-  token      = "FwoGZXIvYXdzEOX//////////wEaDNjztRcTx8YFbkjA4yLJAUqxmYNW10MOgIDEbW7KuTcrrxLBaB/Z6wRqt75TachEJrITVs8QGvFTiUvXHAK1mIIolLWqUbBOj50PSh1+H6K7bzV5Nb7/ZYORFMOXRLbPpqeT0TWRTPBGuWtRH5ptHDkq6i8jhvFJgURr6rrmatg7sVKsTQuVC/6przZU0CXOU4YaiM0qPwiRDXeZyTlORkW/ShENxV4IAXHphDWdL57HYdvObAx22z+vgd/VvhqLWPhtkJ/BMN0DMCFW/Yoo7qOFfE1tKZMJMCjnj8mtBjItNBMHiicnrINysycpH+xGlW7SgeMlWgFFyoKdGrtNclFPMobas4RHnrACpW9b"
+  access_key = "ASIAWKPXDFVAGAGHXFVI"
+  secret_key = "qmxDEn0QoEFRfIsREX2F5YOY79ut+Nd3u0S8czUh"
+  token      = "FwoGZXIvYXdzEEYaDAiixBwBhsYaffu/NCLJAQlOoX4UU41yHCyaGKVeNke1kAzApAhZdFmEWub5vngrcxqKrEAg0tDuN74swiaEFbzLqQTx3oNfMKgKh6x+sh11YK6QcTNLLfpog0jIIu19k/bqgZZU6OFfqyGHAtevigxIogQxIkJe1b2bjqPwVlEj+vGdc7izB443Izdka+PJW+pjTLvreS6cLu8Agz/Zow0uDY8v9cy1HiXNMIC2aqFWwEzgvZE6Vyv5WNgdV2VqKfFfBy5fG4iSVtl9gextAsnwG6fmRDZGJSieuN6tBjIton1H5Lkz8OaHt4oRFAlwauoeHNTbWkrWWclTCxisQOP9ab/S3bAOQ1V3E7CK"
 }
 
 # CREACIÓN DE LOS GRUPOS DE SEGURIDAD.

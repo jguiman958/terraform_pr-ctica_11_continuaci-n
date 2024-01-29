@@ -379,7 +379,12 @@ Si queremos comprobar que funciona, solo tenemos que irnos al panel de las insta
 ## Comprobaciones.
 ### Creación de los grupos de seguridad:
 En la siguiente imagen se ven los grupos de seguridad creados.
-
+![Captura1](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/2e2a1b58-b8f6-427f-a795-87640125c784)
+![Captura2](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/4836e1a2-2019-45fa-906a-ec7d8f66bfac)
+![Captura3](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/0dc5fb67-2f2b-44ee-8fdf-9858dd85fcc8)
+![Captura4](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/61c8ed5a-73bb-4ae1-953e-47eb36123985)
+![Captura5](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/eb7b8195-f99f-43c0-869c-7b672b58c19c)
+Si esto no se crea la instancia no se creará.
 
 ### Creación de las instancias:
 En esta imagen vemos que me ha creado todas esas instancias a la vez, exluyendo la del nodo principal e instancia1 y instancia2.
@@ -387,3 +392,13 @@ En esta imagen vemos que me ha creado todas esas instancias a la vez, exluyendo 
 ![instancias_terraform](https://github.com/jguiman958/practica_11_terraform/assets/145347496/fe019bd3-81e2-4f2c-97c6-b9e049117385)
 
 Y aquí lo tenemos, esto nos enseña a ver una forma cómoda de crear instancias, de forma muy sencilla.
+
+### Creación de las ips elásticas.
+
+![Captura6](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/9f6bf242-6b74-4a57-bfda-bfdc6d8f8035)
+Se han creado y asignado a la instancia, todas a la vez.
+
+### Muestra de las instancias con ips flotantes asociadas.
+![Captura7](https://github.com/jguiman958/terraform_pr-ctica_11_continuaci-n/assets/145347496/db601e7e-8b1e-4a90-b355-fd25a57ffcef)
+
+No está la del backend ya que solo puedo asignar un máximo de 5 y la última está asociada por el nodo principal.
